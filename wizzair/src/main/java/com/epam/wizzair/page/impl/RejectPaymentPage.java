@@ -10,7 +10,7 @@ import static com.epam.wizzair.driver.DriverSingleton.getDriver;
 /**
  * Created by Aliaksandr_Krutsko on 3/10/2017.
  */
-public class RejectPaymentPage {
+public class RejectPaymentPage extends AbstractPage {
 
     private WebDriverWait wait = new WebDriverWait(getDriver(), 5, 1000);
     @FindBy(xpath = "//p[contains(text(),'It seems your bank rejected the payment.')]")
@@ -23,10 +23,14 @@ public class RejectPaymentPage {
         return rejectMessage.getText();
 
 
-
     }
 
+    public RejectPaymentPage() {
+       // PageFactory.initElements(getDriver(), this);
+    }
 
+    @Override
+    public void openPage() {
 
-
+    }
 }

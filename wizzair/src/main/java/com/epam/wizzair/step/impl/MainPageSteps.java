@@ -1,25 +1,16 @@
 package com.epam.wizzair.step.impl;
 
-import com.epam.wizzair.driver.DriverSingleton;
 import com.epam.wizzair.page.impl.*;
-import org.openqa.selenium.WebDriver;
-
-import com.epam.wizzair.page.impl.LoginPage;
+import com.epam.wizzair.page.util.BaggageCabinOptions;
+import com.epam.wizzair.page.util.BaggageCheckedOptions;
+import com.epam.wizzair.page.util.CheckInMethod;
 
 
 public class MainPageSteps {
 
-    private WebDriver driver;
 
-    public void initBrowser() {
-        driver = DriverSingleton.getDriver();
-    }
 
-    public void closeBrowser() {
-        driver.quit();
-    }
-
-    public void findFlight(String origin, String destination, int departureDay, int returnDay) {
+    public static void findFlight(String origin, String destination, int departureDay, int returnDay) {
         MainPage mainPage = new MainPage();
 
 
@@ -30,7 +21,7 @@ public class MainPageSteps {
         mainPage.search();
     }
 
-    public String getTwoFlightPrices() {
+    public static String getTwoFlightPrices() {
         SearchResult searchResult = new SearchResult();
         String firstFlightPrice = searchResult.chooseFirstFlight().substring(1);
         String secondFlightPrice = searchResult.chooseSecondFlight().substring(1);
@@ -38,7 +29,7 @@ public class MainPageSteps {
         return (sum + "").substring(0,6);
     }
 
-    public String getFlightSumFromLeftWindow() {
+    public static String getFlightSumFromLeftWindow() {
         SearchResult searchResult = new SearchResult();
         String s = searchResult.getTotalPrice().substring(1);
         return s;
@@ -46,9 +37,9 @@ public class MainPageSteps {
 
 
 
-    public void login() {
+    public static void login() {
 
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage();
         loginPage.login("tatester@12storage.com", "qwerty12345");
 
     }
@@ -57,14 +48,14 @@ public class MainPageSteps {
 
 
 
-    public void continueFromServicesPage() {
+    public static void continueFromServicesPage() {
         ServicesPage servicesPage = new ServicesPage();
         servicesPage.continueToNextPage();
     }
 
 
 
-    public void enterPayment() throws InterruptedException {
+    public static void enterPayment() throws InterruptedException {
 
         PaymentPage paymentPage = new PaymentPage();
         paymentPage.setStreet("AnyStreet");
@@ -75,22 +66,16 @@ public class MainPageSteps {
         paymentPage.setCardName("Tester");
         paymentPage.setCardCvv("512");
         paymentPage.acceptPolicy();
-        Thread.sleep(1000);
         paymentPage.confirmPayment();
-        Thread.sleep(5000);
+
 
 
     }
 
 
-//    public String getRejectMessage() {
-//        RejectPaymentPage rejectPaymentPage = new RejectPaymentPage();
-//
-//        String message = rejectPaymentPage.getRejectMessage();
-//        return message;
-//    }
 
-    public void getFlights() {
+
+    public static void getFlights() {
         SearchResult searchResult = new SearchResult();
         searchResult.chooseFirstFlight();
         searchResult.chooseSecondFlight();
@@ -99,24 +84,38 @@ public class MainPageSteps {
 
 
 
-    public void declineWiz() {
+    public static void declineWiz() {
         WizzDiscountPage wizzDiscountPage = new WizzDiscountPage();
         wizzDiscountPage.declineOffer();
     }
 
 
-    public void continueFromSeats() {
 
-        SeatPage seatPage = new SeatPage();
-        seatPage.continueToNextPage();
-
-
-    }
-    public void getRidOfStickBar() {
+    public static void getRidOfStickBar() {
         MainPage mainPage = new MainPage();
         mainPage.stickyBarClose();
     }
 
+    public static void continueFromSeats() {
+        SeatPage seatPage = new SeatPage();
+        seatPage.continueOrigin();
+        seatPage.continueReturn();
+
+
+    }
+
+    public static void choosePassengerEquipment() {
+        Passenger passenger = new Passenger();
+
+        passenger.setCheckedInBaggage(BaggageCheckedOptions.NONE);
+
+        passenger.setCabinBaggage(BaggageCabinOptions.SMALL);
+
+        passenger.setSportEquipment(true);
+
+        passenger.setCheckInMethod(CheckInMethod.ONLINE);
+        passenger.submit();
+    }
 
 
 

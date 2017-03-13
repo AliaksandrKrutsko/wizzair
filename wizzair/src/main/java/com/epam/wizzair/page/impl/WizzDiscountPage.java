@@ -2,15 +2,12 @@ package com.epam.wizzair.page.impl;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
-import static com.epam.wizzair.driver.DriverSingleton.getDriver;
 
 
 public class WizzDiscountPage extends AbstractPage {
     public WizzDiscountPage() {
         //super(driver);
-        PageFactory.initElements(getDriver(), this);
+       // PageFactory.initElements(getDriver(), this);
     }
 
     @Override

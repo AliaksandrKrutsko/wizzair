@@ -8,9 +8,6 @@ import com.epam.wizzair.page.util.CheckInMethod;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
-import static com.epam.wizzair.driver.DriverSingleton.getDriver;
 
 /**
  * Created by Dzmitry_Sankouski on 06-Mar-17.
@@ -53,7 +50,7 @@ public class Passenger extends AbstractPage implements IPassenger {
 
     public Passenger() {
         //super(driver);
-        PageFactory.initElements(getDriver(), this);
+        //PageFactory.initElements(getDriver(), this);
     }
 
     public Passenger setCheckedInBaggage(BaggageCheckedOptions depOption) {

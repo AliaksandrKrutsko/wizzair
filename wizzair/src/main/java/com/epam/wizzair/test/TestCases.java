@@ -1,11 +1,7 @@
 package com.epam.wizzair.test;
 
 import com.epam.wizzair.helper.Config;
-import com.epam.wizzair.page.impl.Passenger;
 import com.epam.wizzair.page.impl.RejectPaymentPage;
-import com.epam.wizzair.page.util.BaggageCabinOptions;
-import com.epam.wizzair.page.util.BaggageCheckedOptions;
-import com.epam.wizzair.page.util.CheckInMethod;
 import com.epam.wizzair.step.impl.MainPageSteps;
 import junit.framework.Assert;
 import org.testng.annotations.AfterTest;
@@ -33,13 +29,6 @@ public class TestCases{
 
     }
 
-//    @BeforeTest(description = "Init browser")
-//    public void setUp() {
-//        steps = new MainPageSteps();
-//        steps.initBrowser();
-//        DriverSingleton.getDriver();
-//        DriverSingleton.open(Config.url());
-//    }
 
     @Test
     public void flitsSum() {
@@ -52,30 +41,17 @@ public class TestCases{
     public void pay() throws InterruptedException {
 
 
-        steps.getRidOfStickBar();
+        MainPageSteps.getRidOfStickBar();
 
-        steps.login();
+        MainPageSteps.login();
 
-        steps.findFlight(origin, destination, departureDay, returnDay);
-        steps.getFlights();
-        Passenger passenger = new Passenger();
-
-        passenger.setCheckedInBaggage(BaggageCheckedOptions.NONE);
-
-        passenger.setCabinBaggage(BaggageCabinOptions.SMALL);
-
-        passenger.setSportEquipment(true);
-
-        passenger.setCheckInMethod(CheckInMethod.ONLINE);
-
-        passenger.submit();
-
-        steps.continueFromSeats();//currently not working; click this manually
-        steps.continueFromSeats();
-
-        steps.continueFromServicesPage();
-        steps.declineWiz();
-        steps.enterPayment();
+        MainPageSteps.findFlight(origin, destination, departureDay, returnDay);
+        MainPageSteps.getFlights();
+        MainPageSteps.choosePassengerEquipment();
+        MainPageSteps.continueFromSeats();
+        MainPageSteps.continueFromServicesPage();
+        MainPageSteps.declineWiz();
+        MainPageSteps.enterPayment();
         RejectPaymentPage rejectPaymentPage = new RejectPaymentPage();
         String message = rejectPaymentPage.getRejectMessage();
         assertEquals(message, "It seems your bank rejected the payment.");

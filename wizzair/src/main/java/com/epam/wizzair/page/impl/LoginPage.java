@@ -1,11 +1,7 @@
 package com.epam.wizzair.page.impl;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
-import static com.epam.wizzair.driver.DriverSingleton.getDriver;
 
 
 public class LoginPage extends AbstractPage {
@@ -28,9 +24,9 @@ public class LoginPage extends AbstractPage {
 
 
 
-    public LoginPage(WebDriver driver){
-        //super(driver);
-        PageFactory.initElements(getDriver(), this);
+    public LoginPage(){
+
+        //PageFactory.initElements(getDriver(), this);
     }
 
     @Override

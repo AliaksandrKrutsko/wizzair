@@ -2,7 +2,6 @@ package com.epam.wizzair.page.impl;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -16,8 +15,8 @@ public class SeatPage extends AbstractPage {
     private WebDriverWait wait = new WebDriverWait(getDriver(), 5, 1000);
 
     public SeatPage() {
-        //super(driver);
-        PageFactory.initElements(getDriver(), this);
+
+       // PageFactory.initElements(getDriver(), this);
     }
 
     @Override
@@ -25,16 +24,25 @@ public class SeatPage extends AbstractPage {
 
     }
 
-    @FindBy(xpath = "//button[contains(@class, 'button button--medium button--filled') and text() = 'Continue']")
-    //@FindBy(xpath = "//form[@name='seat-selection']//a[text()='Continue']")
-    private WebElement nextPage;
+    @FindBy(xpath = "//form[@name ='seat-selection']//button[@class = 'button button--medium button--filled' and text()='Continue' and @type = 'button']")
+    private WebElement seatOriginContinue;
+
+    //@FindBy(xpath = "//button[contains(@class, 'button button--medium button--filled') and text() = 'Continue']")
+    @FindBy(xpath = "//form[@name ='seat-selection']//button[@class = 'button button--medium button--filled' and text()='Continue' and @type = 'submit']")
+    private WebElement seatReturnContinue;
 
 
-    public SeatPage continueToNextPage() {
+    public SeatPage continueOrigin() {
+        seatOriginContinue.click();
+        return this;
+    }
 
-        wait.until(ExpectedConditions.visibilityOf(nextPage));
-        //((JavascriptExecutor)getDriver()).executeScript("arguments[0].checked = true;", nextPage);
-        nextPage.click();
+
+    public SeatPage continueReturn() {
+
+        wait.until(ExpectedConditions.elementToBeClickable(seatReturnContinue));
+
+        seatReturnContinue.click();
         return this;
 
     }

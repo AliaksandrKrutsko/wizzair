@@ -3,13 +3,10 @@ package com.epam.wizzair.page.impl;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-
-import static com.epam.wizzair.driver.DriverSingleton.getDriver;
 
 public class SelectSeatPage extends AbstractPage {
 
@@ -39,7 +36,7 @@ public class SelectSeatPage extends AbstractPage {
 
     public SelectSeatPage(WebDriver driver){
         //super(driver);
-        PageFactory.initElements(getDriver(), this);
+       // PageFactory.initElements(getDriver(), this);
     }
 
     @Override

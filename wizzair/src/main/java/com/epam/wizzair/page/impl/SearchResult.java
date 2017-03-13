@@ -1,9 +1,6 @@
 package com.epam.wizzair.page.impl;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
-import static com.epam.wizzair.driver.DriverSingleton.getDriver;
 
 
 public class SearchResult extends AbstractPage {
@@ -26,7 +23,7 @@ public class SearchResult extends AbstractPage {
 
     public SearchResult(){
         //super(driver);
-        PageFactory.initElements(getDriver(), this);
+       // PageFactory.initElements(getDriver(), this);
     }
 
 
